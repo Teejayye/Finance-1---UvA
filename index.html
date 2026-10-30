@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finance 1 Study Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1ef;--card:#fff;--ink:#14212b;--mut:#5b6872;--line:#d5dcd8;--acc:#1d5c49;--acc2:#e6f0ec;--hi:#e9c53f;--ok:#17703b;--okb:#e1f3e7;--no:#b3261e;--nob:#fbe8e6;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171c;--card:#182229;--ink:#e8eef0;--mut:#9aa8b0;--line:#2b3a43;--acc:#6fd0aa;--acc2:#183228;--ok:#6fd49a;--okb:#14301f;--no:#f48b82;--nob:#3a1d1b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10171c;--card:#182229;--ink:#e8eef0;--mut:#9aa8b0;--line:#2b3a43;--acc:#6fd0aa;--acc2:#183228;--ok:#6fd49a;--okb:#14301f;--no:#f48b82;--nob:#3a1d1b;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Schibsted Grotesk",system-ui,sans-serif}
+button,input{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:2.5px solid var(--acc);outline-offset:2px}
+.shell{display:grid;grid-template-columns:250px 1fr;max-width:1100px;margin:0 auto;min-height:100vh}
+aside{padding:22px 16px;border-right:1px solid var(--line);position:sticky;top:0;align-self:start;height:100vh;overflow:auto}
+aside h1{font-size:21px;line-height:1.1;margin:0 0 4px;font-weight:800}
+aside .sub{font-size:13px;color:var(--mut);margin:0 0 16px}
+.wk{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:8px;padding:8px 10px;margin-bottom:3px}
+.wk b{display:block;font-size:15px}.wk span{font-size:12.5px;color:var(--mut)}
+.wk.on{background:var(--acc);border-color:var(--acc)}.wk.on b,.wk.on span{color:#fff}
+.wk.empty{opacity:.6}.wk .bar{height:3px;background:var(--line);border-radius:2px;margin-top:5px}.wk .bar i{display:block;height:100%;background:var(--hi);border-radius:2px}
+.info{font-size:13px;color:var(--mut);border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+main{padding:22px 26px 70px;min-width:0}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;margin-bottom:20px}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font-weight:600;color:var(--mut);white-space:nowrap}
+.tabs button.on{color:var(--ink);border-color:var(--hi)}
+h2{font-size:26px;margin:0 0 4px;font-weight:800;line-height:1.15}h3{font-size:18px;margin:22px 0 6px}
+.lead{color:var(--mut);margin:0 0 18px}
+.read{font-family:Newsreader,Georgia,serif;font-size:18px;line-height:1.65;max-width:68ch}
+.read p{margin:.6em 0}.read ul{padding-left:1.2em}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 20px 16px;margin-bottom:14px}
+.sec h3{margin-top:14px}
+table{border-collapse:collapse;font:14px/1.4 "Schibsted Grotesk",sans-serif;width:100%}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.scroll{overflow-x:auto;max-width:100%;margin:10px 0}
+.f{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.fc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.fc small{display:block;color:var(--mut);font-size:12.5px}.fc code{display:block;font:500 15px/1.4 ui-monospace,Menlo,monospace;margin-top:4px}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 8px;border-radius:99px;background:var(--acc2);color:var(--acc)}
+.tag.g{background:var(--okb);color:var(--ok)}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;max-width:760px}
+.q p.t{font-size:18px;font-weight:600;margin:8px 0 14px}
+.opt{display:flex;gap:10px;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:8px}
+.opt:hover:not(:disabled){border-color:var(--acc)}.opt b{min-width:1.3em;color:var(--mut)}
+.opt.ok{background:var(--okb);border-color:var(--ok)}.opt.no{background:var(--nob);border-color:var(--no)}
+input[type=text],input[type=search]{border:1.5px solid var(--line);background:var(--bg);border-radius:9px;padding:10px 12px;width:180px}
+input[type=search]{width:100%;max-width:420px;margin-bottom:14px}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:10px 16px;font-weight:600}
+.btn.s{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.fb{margin-top:14px;padding:12px 14px;border-radius:9px;font-size:15.5px}.fb.ok{background:var(--okb)}.fb.no{background:var(--nob)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.pill{border:1.5px solid var(--line);background:var(--card);border-radius:99px;padding:5px 12px;font-size:14px}.pill.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
+dl{margin:0}dt{font-weight:700;margin-top:12px}dd{margin:2px 0 0;color:var(--mut)}
+.empty{border:2px dashed var(--line);border-radius:12px;padding:30px;text-align:center;color:var(--mut);max-width:560px}
+@media(max-width:760px){.shell{display:block}aside{position:static;height:auto;border:0;border-bottom:1px solid var(--line)}.wks{display:flex;gap:6px;overflow-x:auto}.wk{min-width:132px}.info{display:none}main{padding:18px 16px 60px}}
+#hm{cursor:pointer}.big{font-size:clamp(32px,5vw,48px);letter-spacing:-.02em;margin:6px 0}
+.info2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0 28px}.info2 div{border-left:4px solid var(--hi);padding:2px 14px}.info2 b{display:block}.info2 span{color:var(--mut);font-size:14px}
+.hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.hc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}.hc small{color:var(--mut);font-weight:600}.hc b{display:block;font-size:18px;line-height:1.25;margin:2px 0}.hc span{display:block;font-size:13.5px;color:var(--mut)}.hc.e{opacity:.55;border-style:dashed}
+.hc .bar{height:4px;background:var(--line);border-radius:2px;margin:12px 0 8px}.hc .bar i{display:block;height:100%;background:var(--acc);border-radius:2px}
+.pg{height:4px;background:var(--line);border-radius:2px;margin:-6px 0 14px}.pg i{display:block;height:100%;background:var(--hi);border-radius:2px;transition:width .3s}
+.opt.sel{border-color:var(--acc);background:var(--acc2)}.opt{transition:border-color .15s,background .15s}
+.opt.ok,.opt.no{animation:pop .25s}@keyframes pop{50%{transform:scale(1.015)}}
+.tag.b{background:var(--nob);color:var(--no)}
+.dots{display:flex;gap:5px;flex-wrap:wrap;margin:14px 0}.dots button{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--line);background:var(--card);font-size:13px;font-weight:600}.dots .a{background:var(--acc2);border-color:var(--acc)}.dots .c{outline:2px solid var(--ink);outline-offset:1px}
+.res{display:grid;gap:8px;margin:14px 0}.res .r{display:grid;grid-template-columns:60px 1fr 44px;gap:10px;align-items:center;font-size:14px}.res .bar{height:8px;background:var(--line);border-radius:4px}.res .bar i{display:block;height:100%;background:var(--ok);border-radius:4px}
+.big2{font-size:44px;font-weight:800;line-height:1;margin-bottom:8px}.rv{border-top:1px solid var(--line);padding:12px 0;max-width:760px}.rv p{margin:4px 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.info2 .cd{display:block;font-style:normal;margin-top:8px;font-variant-numeric:tabular-nums;color:var(--mut)}.info2 .cd b{display:inline;font-size:26px;color:var(--ink);font-weight:800}
+</style></head><body>
+<div class="shell"><aside><h1 id="hm" tabindex="0" role="button">Finance 1 Study Room</h1><p class="sub">UvA · Berk &amp; DeMarzo, 6th ed.</p><div class="wks" id="wks"></div>
+<div class="info"><b>Midterm</b> (weeks 1–3): 20%, 2 h, multiple choice and fill-in-the-number.<br><b>Final</b>: 80%, all weeks, plus a few open questions. Need ≥ 5.0 on the final and ≥ 5.5 overall.<br>Aids: formula sheet, UvA Casio FX82MS, ENG–NL concept list.</div></aside>
+<main id="main"></main></div>
+<script>
+/* ============ HOW TO ADD A WEEK ============
+   Fill in the matching object in WEEKS: sections (summary), terms, formulas, q (practice), hw (homework).
+   q items: {t:"mc", q, o:[options], a:indexOfCorrect, e:"explanation"}  or  {t:"num", q, a:number, tol:number, u:"unit", e:"explanation"} */
+const WEEKS=[
+{n:1,title:"Corporation, statements, arbitrage",ch:"Ch 1, 2, 3 + Hart & Zingales (2017)",
+sections:[
+{h:"Ch 1 · The corporation",html:`<p>A <b>sole proprietorship</b> (eenmanszaak) has one owner who is also manager and is personally liable. In a <b>partnership</b> (VOF, maatschap, CV) all partners are personally liable. An <b>LLC</b> (BV) and a <b>corporation</b> (NV) are legal entities: shareholders are <b>not</b> liable for the firm’s debts, and ownership is separated from control. NV shares trade on an exchange, BV shares do not. Corporate profit is taxed twice: corporate tax, then income tax on dividends.</p>
+<p><b>Objective:</b> maximize <b>shareholder value</b> (the value of the shares), not profit. Shareholders are the residual claimants (last in line), so in theory they care about everyone else too. This assumes no agency problems and that externalities are priced or regulated.</p>
+<p><b>Agency problem:</b> managers (agents) can pursue their own utility instead of shareholders’ (principals’), e.g. Tyco’s CEO Kozlowski. Remedies: board oversight, pay tied to performance, product-market competition, and takeovers after the share price falls.</p>
+<p><b>Trading:</b> you buy at the <b>ask</b>, sell at the <b>bid</b>; the <b>bid-ask spread</b> is the market maker’s profit.</p>`},
+{h:"Ch 2 · Statements, market vs book value",html:`<p><b>Balance sheet:</b> Assets = Liabilities + Equity. <b>Income statement:</b> Sales − COGS = gross profit; − general costs − depreciation = operating income = <b>EBIT</b>; − interest = pretax income (EBT); − taxes = <b>net income</b>.</p>
+<p><b>Book value</b> is backward-looking (historical cost, accounting rules). <b>Market value</b> is forward-looking (expected cash flows, risk, sentiment). Market cap = share price × shares. Market-to-book = market value of equity ÷ book value of equity. Example: Firm Z, factory cost $100, pays $150 in 1 year at 8%: assets are worth 150/1.08 = $139, so equity = 139 − 40 = $99, share price $9.90, M/B = 99/60 = 1.65. A project with NPV $5 raises equity to $104 and the price to $10.40.</p>
+<p><b>Enterprise value</b> = market cap + debt − cash = value of the operating assets. Net debt = debt − cash.</p>
+<div class="scroll"><table><tr><th>Ratio group</th><th>On midterm formula sheet</th><th>Learn by heart (not given)</th></tr>
+<tr><td>Liquidity, coverage, leverage</td><td>Current ratio, EBIT/interest, debt-to-capital</td><td>Debt-equity (book, market), debt-to-EV, net profit margin</td></tr>
+<tr><td>Working capital</td><td>AR days, AP days, inventory days</td><td>–</td></tr>
+<tr><td>Returns, valuation</td><td>ROE</td><td>M/B, P/E, EV/Sales, EV/EBITDA</td></tr></table></div>
+<p>Per your screenshot, the crossed-out ratios (margins except net, quick, cash, equity multipliers, EV/EBIT, asset turnover, ROA, ROIC, EBITDA coverage) are excluded.</p>`},
+{h:"Profit versus cash flow",html:`<p>Profit follows accounting rules; cash flow follows money. Revenues are not always inflows and costs not always outflows. <b>Cash flow = profit − increase in NWC</b>, where NWC = current assets − current liabilities (here accounts receivable − accounts payable). Example: sales 100 (80 received), COGS 70 (60 paid): profit 30, cash flow 20, increase in NWC 10.</p>
+<ul><li>Taxes are based on profit: 30% of EBIT 30 = 9, so cash flow = 21 − 10 = 11.</li><li><b>Capex</b> is a cash outflow but not a cost. <b>Depreciation</b> is a cost but not a cash outflow. It creates a <b>depreciation tax shield</b> (tax rate × depreciation).</li><li>Inventory purchases are cash outflows that are not in profit.</li></ul>
+<p><b>FCF = unlevered net income + depreciation − capex − increase in NWC.</b> Example: 15.4 + 8 − 24 − 10 = −10.6. Free cash flow excludes financing flows (separation principle); unlevered net income ignores interest.</p>`},
+{h:"Ch 3 · Valuation, arbitrage, law of one price",html:`<p>Use <b>market prices</b> to get cash values, but only in <b>competitive markets</b> (same price to buy and sell, ignoring transaction costs). A euro today beats a euro next year because you can invest it. Compare only at the <b>same moment</b>: <b>PV</b> = CF/(1+r) (discounting), <b>FV</b> = CF×(1+r) (compounding). Value a stream by adding the PVs.</p>
+<p><b>NPV</b> = PV(benefits) − PV(costs). Take the highest-NPV alternative; accept NPV &gt; 0. Invest 8 to get 9 at 10%: NPV = −8 + 9/1.10 = 0.18 &gt; 0, so accept.</p>
+<p><b>Arbitrage:</b> profit without risk or net investment (rare). <b>No-arbitrage price</b> = PV of all cash flows. A <b>normal market</b> has no arbitrage. Then the <b>law of one price</b> holds (equivalent assets trade at one price), which gives <b>value additivity</b>: Price(A+B) = Price(A) + Price(B), and firm value V = D + E. It also gives the <b>separation principle</b>: buying or selling securities has NPV 0, so investment decisions can be separated from financing decisions.</p>
+<p><b>Bond arbitrage method:</b> match the coupon bond’s cash flows with zero-coupon bonds and compare prices. Zeros at 972.14, 939.62 and 906.24: the 10% coupon bond is worth 0.1×972.14 + 0.1×939.62 + 1.1×906.24 ≈ $1188, but trades at $1183.95. Buy the cheap bond, sell the replicating zeros.</p>`},
+{h:"Article · Hart & Zingales (2017)",html:`<p>Friedman argued managers should make as much money as possible within the rules. Hart and Zingales say <b>shareholder welfare ≠ market value</b>: shareholders are prosocial and care about more than money. Friedman’s <b>separability</b> assumption (let companies make money and let people give to charity) fails when profit and damage are inseparable, e.g. oil digging, or Walmart selling high-capacity magazines. Politics also does not fix everything.</p>
+<p><b>Amoral drift:</b> hostile bidders only care about money, and dispersed shareholders tender anyway (collective action problem), so takeovers push firms from clean to dirty. There is no mirror-image drift, because nobody gains by buying a dirty firm to clean it. <b>Voting</b> by shareholders avoids this asymmetry. Authors’ proposal: managers and asset managers follow investors’ preferences, via votes or polls. Fiduciary duty is not just maximizing value (the Shkreli example). Prefer <b>invest and engage</b> over divestment.</p>`}],
+terms:[["Sole proprietorship","One owner who is also the manager; personal liability."],["Partnership","Several owners, all personally liable (VOF, maatschap)."],["Limited liability","Shareholders lose at most their investment, not the firm’s debts."],["Shareholder value","The value of the firm’s shares; the standard objective of the corporation."],["Residual claimant","Shareholders are paid last, after creditors."],["Agency problem","Managers pursue their own interests instead of the shareholders’."],["Externality","A cost or benefit to others that is not priced (e.g. pollution)."],["Bid-ask spread","Ask price minus bid price; the market maker’s profit."],["EBIT","Earnings before interest and taxes = operating income + other income."],["Market capitalization","Share price × number of shares = market value of equity."],["Market-to-book ratio","Market value of equity ÷ book value of equity."],["Enterprise value","Market cap + debt − cash; market value of operating assets."],["Net working capital","Current assets − current liabilities."],["Free cash flow","Unlevered net income + depreciation − capex − increase in NWC."],["Depreciation tax shield","Tax saved because depreciation is deductible: tax rate × depreciation."],["Discount factor","1/(1+r): converts a future cash flow into present value."],["NPV","PV of all cash flows including the initial investment."],["Arbitrage","Risk-free profit with no net investment."],["Law of one price","Equivalent assets in competitive markets trade at the same price."],["Value additivity","Price of a bundle = sum of the prices of its components."],["Separation principle","Securities trades have NPV 0, so investment and financing decisions are separate."],["Amoral drift","Hart & Zingales: takeovers push companies toward ignoring externalities."]],
+formulas:[["Current ratio","Current assets / Current liabilities","s"],["EBIT / interest","EBIT / Interest expense","s"],["Debt-to-capital","Debt / (Equity + Debt)","s"],["ROE","Net income / Book equity","s"],["AR days","AR / Avg daily sales","s"],["AP days","AP / Avg daily COGS","s"],["Inventory days","Inventory / Avg daily COGS","s"],["Free cash flow","UNI + Depr − CapEx − ΔNWC","s"],["FV","CF × (1+r)^n","s"],["PV","CF / (1+r)^n","s"],["Enterprise value","Mkt cap + Debt − Cash"],["Market cap","Price × Shares"],["Market-to-book","Mkt equity / Book equity"],["P/E","Price / EPS"],["Net profit margin","Net income / Sales"],["Debt-equity","Debt / Equity (book or market)"],["NPV","−Investment + Σ CF/(1+r)^t"],["Cash flow (simple)","Profit − increase in NWC"],["No-arbitrage price","PV of all the security’s cash flows"]],
+q:[
+{t:"mc",q:"According to the book, what is the objective of the firm?",o:["Maximize profit","Maximize shareholder value","Maximize growth","Maximize employee welfare"],a:1,e:"Shareholder value (share value), not profit. The slides stress it ‘is a good start’ but ignores externalities and agency problems."},
+{t:"mc",q:"Which legal form has limited liability AND a separation of ownership and control?",o:["Sole proprietorship","Partnership (VOF)","Corporation (NV)","Both a sole proprietorship and a partnership"],a:2,e:"Only the BV and NV are separate legal entities with limited liability and separation of ownership and control."},
+{t:"mc",q:"A CEO spends shareholders’ money on a lavish lifestyle. This is an example of…",o:["An externality","An agency problem","Arbitrage","Value additivity"],a:1,e:"Self-interested managers (agents) maximize their own utility instead of shareholder value (Tyco example)."},
+{t:"mc",q:"Which is NOT a mechanism that pushes managers to serve shareholders?",o:["A board of directors overseeing the CEO","Pay tied to firm performance","Hostile takeovers after a falling share price","A fixed salary regardless of performance"],a:3,e:"Fixed pay gives no incentive link. The other three are the corporate governance mechanisms from the slides."},
+{t:"mc",q:"Which statement is true?",o:["Book value of equity includes the firm’s future prospects","Market value of equity can be read off the financial statements","Market cap is the market value of equity and includes future prospects","Average profit of 3–5 years gives the market value"],a:2,e:"Market value is forward-looking; book value is historical and backward-looking."},
+{t:"mc",q:"Depreciation is…",o:["A cash outflow but not a cost","A cost but not a cash outflow","Both a cost and a cash outflow","Neither a cost nor a cash outflow"],a:1,e:"It spreads a past capex over the asset’s life. It lowers profit and taxes but no cash leaves the firm. Capex is the cash outflow."},
+{t:"mc",q:"Which is a true arbitrage opportunity?",o:["Buying an undervalued stock to hold it for a rise","Buying a stock in one market and selling it immediately for more in another","Buying a $99 risk-free bond paying $100 in a year at 1.01% interest","Borrowing at 5% to buy shares expected to return 8%"],a:1,e:"Arbitrage is risk-free and needs no net investment. The bond is fairly priced (100/1.0101 = 99); the others carry risk."},
+{t:"mc",q:"The separation principle says that…",o:["Owners and managers must be separate","In a normal market the investment decision can be separated from the financing decision","Debt and equity must be priced separately","Profit and cash flow are unrelated"],a:1,e:"Security transactions at fair prices have NPV 0, so they neither create nor destroy value."},
+{t:"mc",q:"Hart & Zingales argue that Friedman’s case for profit maximization fails when…",o:["Shareholders are not prosocial","Externalities are inseparable from the money-making activity","Managers have no agency problem","Governments perfectly regulate externalities"],a:1,e:"If damage and profit are inseparable, shareholders cannot undo the damage themselves. Shareholder welfare then differs from market value."},
+{t:"num",q:"A firm has net income $100 and book equity $500. What is ROE?",a:20,tol:.1,u:"%",e:"ROE = 100/500 = 20%."},
+{t:"num",q:"KO in 2018: price $46.07, 4.261 billion shares. Market cap?",a:196.3,tol:.1,u:"$ billion",e:"46.07 × 4.261 = 196.30."},
+{t:"num",q:"KO 2018: market cap 196.30bn, debt 70.8bn, cash 6.0bn. Enterprise value?",a:261.1,tol:.1,u:"$ billion",e:"EV = 196.30 + 70.8 − 6.0 = 261.10."},
+{t:"num",q:"KO 2018: market cap 196.30bn, book equity 17.1bn. Market-to-book ratio?",a:11.48,tol:.02,u:"×",e:"196.30 / 17.1 = 11.48."},
+{t:"num",q:"Firm Z: a factory pays one $150 cash flow in a year at 8%. Debt $40, 10 shares. Share price?",a:9.89,tol:.05,u:"$",e:"Assets = 150/1.08 = 138.9; equity = 98.9; price = 9.89."},
+{t:"num",q:"Sales 100 (80 received), COGS 70 (60 paid), no tax. Cash flow?",a:20,tol:.01,u:"$",e:"Inflow 80 − outflow 60 = 20, or profit 30 − increase in NWC 10."},
+{t:"num",q:"UNI 15.4, depreciation 8, capex 24, increase in NWC 10. Free cash flow?",a:-10.6,tol:.05,u:"",e:"15.4 + 8 − 24 − 10 = −10.6."},
+{t:"num",q:"Project D costs €50 today and pays €50 in a year; r = 2%. NPV?",a:-.98,tol:.01,u:"€",e:"−50 + 50/1.02 = −0.98: reject."},
+{t:"num",q:"S1 costs €50 and pays €60 in 1 year; S2 costs €45 and pays €60 in 2 years. No-arbitrage price of a security paying €60 in each year?",a:95,tol:.01,u:"€",e:"Price(S1) + Price(S2) = 50 + 45 = 95 (value additivity)."},
+{t:"num",q:"AR is $60,000 and annual sales $730,000 (365 days). AR days?",a:30,tol:.1,u:"days",e:"Daily sales = 2,000; 60,000/2,000 = 30 days."}],
+hw:[
+{q:"Ch 1 · [PREPARE] Objective of the firm, plus two advantages and two disadvantages.",a:"Maximize shareholder value. Advantages: clear, measurable (share price); aligns with owners and efficient capital allocation. Disadvantages: ignores externalities (pollution) and stakeholders; invites short-termism and agency problems."},
+{q:"Ch 1 · [IN CLASS] Mechanisms that push managers toward shareholder interests.",a:"Board oversight, performance-based pay, competition in product markets, takeover threat after poor performance."},
+{q:"Ch 2 · KO: show the market cap change is $14.94bn, and M/B went 7.85 → 11.48.",a:"2017: 41.74 × 4.345 = 181.36bn; 2018: 46.07 × 4.261 = 196.30bn; change 14.94bn. M/B 2017 = 181.36/23.1 = 7.85; 2018 = 196.30/17.1 = 11.48."},
+{q:"Ch 2 · KO: show the EV changed by $24.1bn. What does EV represent?",a:"EV 2017 = 181.36 + 64.2 − 8.6 = 236.96; EV 2018 = 196.30 + 70.8 − 6.0 = 261.10; change 24.14bn. EV is the market value of the operating assets, independent of financing."},
+{q:"Ch 2 · [IN CLASS] A liquidity ratio? EBITDA/interest of 1.3?",a:"Current ratio (formula sheet). EBITDA/interest of 1.3 means operating cash earnings barely cover interest: little buffer, high financial risk."},
+{q:"Ch 2 · [IN CLASS] Which is the better measure of net worth: market or book value of equity?",a:"Market value: forward-looking, reflects expected cash flows and risk. Book value is historical cost and misses intangibles; but market values can be affected by bubbles and sentiment."},
+{q:"Ch 3 · Projects (r = 2%): A −100/+150, B +150/−150, C +100/−102, D −50/+50. NPVs? Which to pick?",a:"A = 47.06, B = 2.94, C = 0, D = −0.98. Mutually exclusive: A. Unlimited choice: A and B (C is indifferent)."},
+{q:"Ch 3 · [IN CLASS] What happens if r rises? If B’s year-1 payment is moved to year 2?",a:"A falls (cost today, benefit later). B and C rise, because they are borrowing-type flows (receive now, pay later). Postponing B’s payment makes it cheaper in PV, so B’s NPV rises."},
+{q:"Ch 3 · S1 (€50 → 60 in yr 1), S2 (€45 → 60 in yr 2): no-arbitrage price of S3 (60 and 60)? S4 (120, 180) trades at €245?",a:"S3 = 50 + 45 = 95. S4 = 2×S1 + 3×S2 = 100 + 135 = 235. At 245 it is overpriced by €10: sell S4, buy 2 S1 and 3 S2, keep €10 today with zero later cash flows. No-arbitrage means equivalent cash flows have one price."}]},
+{n:2,title:"Time value, interest rates, bonds",ch:"Ch 4, 5, 6"},
+{n:3,title:"Investment rules, capital budgeting",ch:"Ch 7, 8 + Graham & Harvey (2022)"},
+{n:4,title:"Midterm (weeks 1–3)",ch:"No new material"},
+{n:5,title:"Stocks, risk and return, portfolios",ch:"§9.1–9.4, Ch 10, 11"},
+{n:6,title:"CAPM, investor behavior, efficiency",ch:"§12.1–12.3, §9.5, §13.1–13.4"},
+{n:7,title:"Working capital, short-term planning",ch:"Ch 26, §27.1, 27.2, 27.4"}];
+
+/* ============ ENGINE ============ */
+const $=s=>document.querySelector(s);let P={};try{P=JSON.parse(localStorage.getItem("fin1.v1")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("fin1.v1",JSON.stringify(P))}catch(e){}};
+const S={w:1,tab:"summary",pool:"week",i:0,done:false,sel:null,home:true,qz:null};
+const qid=(w,i)=>"w"+w+"q"+i;
+const has=w=>!!(w.sections||w.q);
+const pool=()=>{let a=[];WEEKS.filter(w=>w.q&&(S.pool!=="week"||w.n===S.w)).forEach(w=>w.q.forEach((q,i)=>a.push({...q,id:qid(w.n,i),w:w.n})));return S.pool==="miss"?a.filter(q=>P[q.id]===0):a};
+function side(){$("#wks").innerHTML='<button class="wk '+(S.home?"on":"")+'" id="hb"><b>Home</b><span>All weeks</span></button>'+WEEKS.map(w=>{const t=(w.q||[]).length,d=(w.q||[]).filter((_,i)=>P[qid(w.n,i)]===1).length;
+return`<button class="wk ${!S.home&&S.w===w.n?"on":""} ${has(w)?"":"empty"}" data-w="${w.n}"><b>Week ${w.n}</b><span>${w.title}</span>${t?`<div class="bar"><i style="width:${d/t*100}%"></i></div>`:""}</button>`}).join("");
+$("#hb").onclick=()=>{S.home=true;draw()};document.querySelectorAll(".wk[data-w]").forEach(b=>b.onclick=()=>{S.home=false;S.qz=null;S.w=+b.dataset.w;S.i=0;S.done=false;S.pool="week";if(!has(WEEKS[S.w-1]))S.tab="summary";draw()})}
+function draw(){side();if(S.home)return home();const w=WEEKS[S.w-1];const tabs=[["summary","Summary"],["formulas","Formulas"],["terms","Terms"],["practice","Practice"],["quiz","Weekly quiz"],["hw","Homework"]];
+let h=`<h2>Week ${w.n}: ${w.title}</h2><p class="lead">${w.ch}</p>`;
+if(!has(w)){$("#main").innerHTML=h+`<div class="empty">This week has no material yet.<br>Send the slides, summary and homework and it will appear here.</div>`;return}
+h+=`<div class="tabs" role="tablist">${tabs.map(([k,l])=>`<button class="${S.tab===k?"on":""}" data-t="${k}">${l}</button>`).join("")}</div><div id="body"></div>`;
+$("#main").innerHTML=h;document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.i=0;S.done=false;draw()});
+({summary:sum,formulas:frm,terms:trm,practice:prac,quiz:quiz,hw:hwk})[S.tab](w)}
+const sum=w=>{$("#body").innerHTML=w.sections.map(s=>`<section class="sec"><h3>${s.h}</h3><div class="read">${s.html}</div></section>`).join("")};
+const frm=w=>{const f=(w.formulas||[]);const card=a=>`<div class="fc"><small>${a[0]}</small><code>${a[1]}</code></div>`;
+$("#body").innerHTML=`<h3>On the midterm formula sheet <span class="tag g">given</span></h3><div class="f">${f.filter(a=>a[2]).map(card).join("")}</div><h3>Know by heart <span class="tag">not given</span></h3><div class="f">${f.filter(a=>!a[2]).map(card).join("")}</div>`};
+const trm=w=>{$("#body").innerHTML=`<input type="search" id="fq" placeholder="Search terms across all weeks" aria-label="Search terms"><dl id="dl"></dl>`;
+const all=WEEKS.flatMap(x=>(x.terms||[]).map(t=>[...t,x.n]));const go=()=>{const v=$("#fq").value.toLowerCase();$("#dl").innerHTML=all.filter(t=>(t[0]+t[1]).toLowerCase().includes(v)).map(t=>`<dt>${t[0]} <span class="tag">Week ${t[2]}</span></dt><dd>${t[1]}</dd>`).join("")||"<p class=lead>No term matches.</p>"};$("#fq").oninput=go;go()};
+const hwk=w=>{$("#body").innerHTML=`<p class="lead">Homework 1 on Canvas. Try each one yourself, then open the answer.</p>`+w.hw.map(x=>`<details><summary>${x.q}</summary><p>${x.a}</p></details>`).join("")};
+function prac(w){const a=pool();const mc=WEEKS.filter(x=>x.q).reduce((n,x)=>n+x.q.filter((_,i)=>P[qid(x.n,i)]===0).length,0);
+let h=`<div class="row"><button class="pill ${S.pool==="week"?"on":""}" data-p="week">This week</button><button class="pill ${S.pool==="all"?"on":""}" data-p="all">All weeks mixed</button><button class="pill ${S.pool==="miss"?"on":""}" data-p="miss">My mistakes (${mc})</button><button class="pill" data-p="reset">Reset progress</button></div>`;
+if(!a.length){$("#body").innerHTML=h+`<div class="empty">${S.pool==="miss"?"No mistakes saved. Answer some questions first.":"No questions here yet."}</div>`;wire();return}
+if(S.i>=a.length){const c=a.filter(q=>P[q.id]===1).length;$("#body").innerHTML=h+`<div class="q"><h3 style="margin-top:0">Round finished</h3><p>${c} of ${a.length} correct. Wrong answers are saved under My mistakes.</p><button class="btn" id="again">Go again</button></div>`;wire();$("#again").onclick=()=>{S.i=0;S.done=false;draw()};return}
+const q=a[S.i];h+=`<div class="q"><div class="pg"><i style="width:${S.i/a.length*100}%"></i></div><span class="tag">${q.t==="num"?"Fill in the number":"Multiple choice"}</span> <span class="tag">${S.i+1} / ${a.length}</span><p class="t">${q.q}</p>`;
+h+=q.t==="mc"?q.o.map((o,i)=>`<button class="opt ${S.done?(i===q.a?"ok":i===S.sel?"no":""):""}" data-o="${i}" ${S.done?"disabled":""}><b>${"ABCD"[i]}</b><span>${o}</span></button>`).join(""):`<div class="row"><input type="text" id="num" inputmode="decimal" placeholder="Your answer" ${S.done?"disabled":""} aria-label="Answer"> <span>${q.u||""}</span><button class="btn" id="chk" ${S.done?"disabled":""}>Check</button></div><small style="color:var(--mut)">Round to 2 decimals. Use a dot or comma.</small>`;
+if(S.done)h+=`<div class="fb ${P[q.id]?"ok":"no"}"><b>${P[q.id]?"Correct.":"Not quite."}</b> ${q.t==="num"&&!P[q.id]?`Answer: ${q.a} ${q.u||""}. `:""}${q.e}</div><p><button class="btn" id="nx">Next question</button></p>`;
+$("#body").innerHTML=h+"</div>";wire();
+const fin=ok=>{P[q.id]=ok?1:0;save();S.done=true;draw()};
+document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{S.sel=+b.dataset.o;fin(S.sel===q.a)});
+if($("#chk")){const go=()=>{const v=parseFloat($("#num").value.replace(",","."));if(isNaN(v))return;fin(Math.abs(v-q.a)<=q.tol)};$("#chk").onclick=go;$("#num").onkeydown=e=>{if(e.key==="Enter")go()};$("#num").focus()}
+if($("#nx"))$("#nx").onclick=()=>{S.i++;S.done=false;S.sel=null;draw()}}
+function wire(){document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{if(b.dataset.p==="reset"){if(confirm("Delete all saved progress?")){P={};save()}}else S.pool=b.dataset.p;S.i=0;S.done=false;draw()})}
+/* ===== Weekly quiz data: add a quiz to any week with WEEKS[i].quiz=[{ch,t,q,o,a,e} or {ch,t:"num",q,a,tol,u,e}] ===== */
+WEEKS[0].quiz=[
+{ch:"Ch 1",t:"mc",q:"A corporation earns profit and pays it out as a dividend. How is that money taxed?",o:["Only at the corporate level","Only at the shareholder level","At the corporate level and again at the shareholder level","It is not taxed"],a:2,e:"Double taxation: corporate tax on profit, then income tax on the dividend."},
+{ch:"Ch 1",t:"mc",q:"Shareholders are called residual claimants because they…",o:["Hold the residual value of the firm’s buildings","Are paid only after creditors have been paid","Cannot vote on corporate policy","Receive a fixed payment each year"],a:1,e:"Debt holders have a prior claim. Shareholders get what is left, which is why in theory they care about everyone else’s claims too."},
+{ch:"Ch 1",t:"mc",q:"Which is the clearest example of an agency problem?",o:["A firm dumps waste in a river","A CEO buys a corporate jet mainly for personal use","Shareholders sell their shares at the ask price","A firm switches from a BV to an NV"],a:1,e:"Manager (agent) spends shareholders’ money on own benefit. The river is an externality."},
+{ch:"Ch 1",t:"mc",q:"Hart & Zingales (2017) argue that a firm should maximize…",o:["Market value of the shares","Shareholder welfare, which also includes ethical concerns","Stakeholder profit only","Government revenue"],a:1,e:"Shareholders are not only interested in money, so welfare is not the same as market value."},
+{ch:"Ch 1",t:"num",q:"A market maker quotes bid $20.10 and ask $20.30. You buy one share and immediately sell it back. How much do you lose?",a:.2,tol:.005,u:"$",e:"You pay the ask 20.30 and receive the bid 20.10: the spread is $0.20."},
+{ch:"Ch 2",t:"num",q:"Share price $12, 50 million shares, debt $200m, cash $80m. Enterprise value?",a:720,tol:.5,u:"$ million",e:"Market cap 600 + debt 200 − cash 80 = 720."},
+{ch:"Ch 2",t:"num",q:"Accounts payable are $45m and annual COGS $730m (365 days). Accounts payable days?",a:22.5,tol:.1,u:"days",e:"Daily COGS = 2; 45/2 = 22.5 days."},
+{ch:"Ch 2",t:"num",q:"Total debt $300m, book equity $700m. Debt-to-capital ratio?",a:30,tol:.1,u:"%",e:"Debt / (equity + debt) = 300 / 1,000 = 30%."},
+{ch:"Ch 2",t:"mc",q:"A firm has a market-to-book ratio of 0.8. The most consistent interpretation is that…",o:["Investors expect the assets to earn more than their accounting value suggests","Investors expect poor prospects relative to book value","The firm has no debt","Book value is forward-looking"],a:1,e:"Market value below book value signals that investors expect the assets to create less value than their historical cost."},
+{ch:"Ch 2",t:"num",q:"Unlevered net income 40, depreciation 10, capex 25, and NWC rises from 30 to 38. Free cash flow?",a:17,tol:.05,u:"",e:"40 + 10 − 25 − 8 = 17."},
+{ch:"Ch 3",t:"num",q:"€1,500 will be received in one year. The risk-free rate is 3%. Present value?",a:1456.31,tol:.05,u:"€",e:"1,500 / 1.03 = 1,456.31."},
+{ch:"Ch 3",t:"num",q:"Invest €400 today and receive €440 in a year; r = 8%. NPV?",a:7.41,tol:.02,u:"€",e:"−400 + 440/1.08 = 7.41, so accept."},
+{ch:"Ch 3",t:"mc",q:"Projects X, Y, Z have NPVs of 12, 30 and −5. The firm can accept as many as it wants. It should accept…",o:["Y only","X and Y","X, Y and Z","None"],a:1,e:"Accept every positive-NPV project. ‘Y only’ is the answer only if the projects are mutually exclusive."},
+{ch:"Ch 3",t:"num",q:"Security A pays €100 in one year and costs €92. Security B pays €300 in one year. No-arbitrage price of B?",a:276,tol:.5,u:"€",e:"B equals 3 × A, so price 3 × 92 = 276."},
+{ch:"Ch 3",t:"mc",q:"A risk-free security paying €100 in one year trades at €97 while r = 5% (PV = €95.24). What is the best action?",o:["Buy it: it pays 3.1%","Sell it and invest €95.24 at the bank, keeping the difference","Do nothing: the market is normal","Buy it and hold it for a price rise"],a:1,e:"Overpriced by €1.76: selling it and investing the PV replicates the payment risk-free. This is arbitrage."}];
+
+/* ===== Homepage ===== */
+function home(){$("#main").innerHTML=`<h2 class="big">Finance 1 for Business</h2><p class="lead">Week-by-week summaries, practice and quizzes for the midterm and final.</p>
+<div class="info2"><div><b>Midterm · weeks 1–3</b><span>Fri 20 Nov, 09:00–11:00 · 20% of the grade · multiple choice and fill-in-the-number</span><em class="cd" data-d="2026-11-20T09:00"></em></div><div><b>Final · all weeks</b><span>Mon 14 Dec, 09:00–11:00 · 80% · plus a few open questions; you need at least 5.0</span><em class="cd" data-d="2026-12-14T09:00"></em></div></div><div class="hg">`+WEEKS.map(w=>{const t=(w.q||[]).length,d=(w.q||[]).filter((_,i)=>P[qid(w.n,i)]===1).length,z=P["z"+w.n];
+return`<div class="hc ${has(w)?"":"e"}"><small>Week ${w.n}</small><b>${w.title}</b><span>${w.ch}</span>`+(has(w)?`<div class="bar"><i style="width:${d/t*100}%"></i></div><span>${d}/${t} practice correct${z!=null?` · quiz best ${z}/${w.quiz.length}`:""}</span><div class="row" style="margin:12px 0 0">${[["summary","Summary"],["practice","Practice"],["quiz","Quiz"]].map(([k,l])=>`<button class="pill" data-w="${w.n}" data-t="${k}">${l}</button>`).join("")}</div>`:`<p style="margin:12px 0 0">Not added yet</p>`)+`</div>`}).join("")+"</div>";
+document.querySelectorAll(".hc .pill").forEach(b=>b.onclick=()=>{S.home=false;S.w=+b.dataset.w;S.tab=b.dataset.t;S.pool="week";S.i=0;S.done=false;draw()});tick()}
+function tick(){document.querySelectorAll(".cd").forEach(e=>{const ms=new Date(e.dataset.d)-Date.now();if(ms<=0){e.textContent=ms>-72e5?"Exam in progress":"Exam done";return}const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4),s=Math.floor(ms%6e4/1e3);e.innerHTML=`<b>${d}</b> days <b>${h}</b> h <b>${m}</b> min <b>${s}</b> s`})}
+setInterval(tick,1000);
+
+/* ===== Weekly quiz ===== */
+const ok=(q,v)=>q.t==="mc"?v===q.a:v!=null&&v!==""&&Math.abs(parseFloat(String(v).replace(",","."))-q.a)<=q.tol;
+function quiz(w){const Q=w.quiz||[],z=S.qz,B=$("#body");
+if(!Q.length){B.innerHTML='<div class="empty">No quiz for this week yet.</div>';return}
+const chs=[...new Set(Q.map(q=>q.ch))];
+if(!z){const b=P["z"+w.n];B.innerHTML=`<div class="q"><h3 style="margin-top:0">Week ${w.n} quiz</h3><p>${Q.length} exam-style questions, ${Q.length/chs.length} per chapter (${chs.join(", ")}). Multiple choice and fill-in-the-number. You see the answers only after you finish, like in the exam. Have your formula sheet and calculator ready.</p>${b!=null?`<p class="lead">Best score: ${b}/${Q.length}</p>`:""}<button class="btn" id="go">Start quiz</button></div>`;$("#go").onclick=()=>{S.qz={i:0,a:{},fin:false};draw()};return}
+if(z.fin)return qres(w,Q,chs);
+const q=Q[z.i],v=z.a[z.i];
+B.innerHTML=`<div class="q"><div class="pg"><i style="width:${Object.keys(z.a).length/Q.length*100}%"></i></div><span class="tag">${q.ch}</span> <span class="tag">${z.i+1} / ${Q.length}</span><p class="t">${q.q}</p>`+
+(q.t==="mc"?q.o.map((o,i)=>`<button class="opt ${v===i?"sel":""}" data-o="${i}"><b>${"ABCD"[i]}</b><span>${o}</span></button>`).join(""):`<div class="row"><input type="text" id="num" inputmode="decimal" value="${v??""}" placeholder="Your answer" aria-label="Answer"> <span>${q.u||""}</span></div>`)+
+`<div class="dots">${Q.map((_,i)=>`<button class="${i in z.a?"a":""} ${i===z.i?"c":""}" data-j="${i}" aria-label="Question ${i+1}">${i+1}</button>`).join("")}</div><div class="row"><button class="btn s" id="pv" ${z.i?"":"disabled"}>Back</button>${z.i<Q.length-1?'<button class="btn" id="nx2">Next</button>':'<button class="btn" id="fn">Finish and grade</button>'}</div></div>`;
+document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{z.a[z.i]=+b.dataset.o;draw()});
+document.querySelectorAll(".dots button").forEach(b=>b.onclick=()=>{z.i=+b.dataset.j;draw()});
+if($("#num"))$("#num").oninput=e=>{const x=e.target.value.trim();if(x)z.a[z.i]=x;else delete z.a[z.i];document.querySelectorAll(".dots button")[z.i].classList.toggle("a",!!x)};
+$("#pv").onclick=()=>{z.i--;draw()};
+if($("#nx2"))$("#nx2").onclick=()=>{z.i++;draw()};
+if($("#fn"))$("#fn").onclick=()=>{const un=Q.length-Object.keys(z.a).length;if(un&&!confirm(un+" unanswered. Finish anyway?"))return;z.fin=true;draw()}}
+function qres(w,Q,chs){const z=S.qz,r=Q.map((q,i)=>ok(q,z.a[i])),n=r.filter(Boolean).length,g=Math.max(1,10*n/Q.length);
+if(!(P["z"+w.n]>=n)){P["z"+w.n]=n;save()}
+$("#body").innerHTML=`<div class="q"><div class="big2">${n}/${Q.length}</div><p>Estimated grade <b>${g.toFixed(1)}</b> (10 × share correct; the real exam’s scale may differ).</p><div class="res">${chs.map(c=>{const ix=Q.map((q,i)=>q.ch===c?i:-1).filter(i=>i>=0),k=ix.filter(i=>r[i]).length;return`<div class="r"><span>${c}</span><div class="bar"><i style="width:${k/ix.length*100}%"></i></div><span>${k}/${ix.length}</span></div>`}).join("")}</div><button class="btn" id="re">Retake quiz</button></div><h3>Review</h3>`+
+Q.map((q,i)=>`<div class="rv"><span class="tag ${r[i]?"g":"b"}">${r[i]?"Correct":"Wrong"}</span> <span class="tag">${q.ch}</span><p><b>${i+1}. ${q.q}</b></p><p>Your answer: ${z.a[i]==null?"–":q.t==="mc"?q.o[z.a[i]]:z.a[i]} · Correct: ${q.t==="mc"?q.o[q.a]:q.a+" "+(q.u||"")}</p><p style="color:var(--mut)">${q.e}</p></div>`).join("");
+$("#re").onclick=()=>{S.qz=null;draw()}}
+
+/* ===== Shortcuts: A–D pick an option, Enter goes on; brand returns home ===== */
+document.onkeydown=e=>{if(e.target.tagName==="INPUT"||e.metaKey||e.ctrlKey)return;const k="abcd".indexOf(e.key.toLowerCase()),o=document.querySelectorAll(".opt:not(:disabled)");
+if(k>=0&&o[k])o[k].click();else if(e.key==="Enter"){const n=$("#nx")||$("#nx2");if(n)n.click()}};
+$("#hm").onclick=()=>{S.home=true;draw()};
+
+draw();
+</script></body></html>
