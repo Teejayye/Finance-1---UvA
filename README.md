@@ -11,8 +11,8 @@ Each week has:
 
 Exam practice:
 
-- **Past papers**: Midterm 2024 and Midterm 2019, in the original wording. Check each answer as you go, or finish the paper and get a grade.
-- **Mock midterms A, B and C**: 60 new exam-level questions on weeks 1–3. The wrong options come from common calculation mistakes, and the correct answers are spread evenly over A–D.
+- **Past papers**: 
+- **Mock midterms A, B and C**:
 
 Good to know:
 
