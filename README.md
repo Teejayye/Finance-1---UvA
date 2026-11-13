@@ -1,6 +1,8 @@
 # Finance-1---UvA
 Link: **https://teejayye.github.io/Finance-1---UvA/**
 
+PRACTICE QUESTIONS CANVAS x PEARSON **https://mylab.pearson.com/Student/DoAssignments.aspx?view=all**
+
 A study site for **Finance 1 for Business - 6012B0422Y** (UvA).
 
 Each week has:
