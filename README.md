@@ -1,4 +1,6 @@
 # Finance-1---UvA
+<img width="1616" height="1108" alt="image" src="https://github.com/user-attachments/assets/d8c57d3f-2f8e-4f56-8407-1d41493018cc" />
+
 Link: **https://teejayye.github.io/Finance-1---UvA/**
 
 PRACTICE QUESTIONS CANVAS x PEARSON **https://mylab.pearson.com/Student/DoAssignments.aspx?view=all**
